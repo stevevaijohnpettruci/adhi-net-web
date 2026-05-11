@@ -47,17 +47,13 @@ export const About = () => {
             <p
               className={`${darkMode ? "text-gray-300" : "text-gray-600"} mb-4`}
             >
-              Berdiri pada tahun 2025, kami hadir sebagai tim profesional di bidang
-              pengembangan digital. Kami fokus pada pembuatan solusi modern yang
-              membantu bisnis beradaptasi dan berkembang di era teknologi.
+              Berdiri pada tahun 2025, Adhinet hadir sebagai penyedia layanan teknologi di Tasikmalaya. Kami fokus pada tiga bidang utama: jaringan internet, pengembangan software, dan reparasi elektronik.
             </p>
 
             <p
               className={`${darkMode ? "text-gray-300" : "text-gray-600"} mb-6`}
             >
-              Dengan pendekatan yang mengutamakan kualitas, kreativitas, dan efisiensi,
-              kami membangun kemitraan jangka panjang yang berlandaskan kepercayaan dan
-              transparansi. Setiap proyek bagi kami adalah kolaborasi untuk mencapai hasil terbaik.
+              Dengan pendekatan yang mengutamakan kualitas dan kepercayaan, Adhinet membangun hubungan jangka panjang bersama pelanggan. Setiap layanan kami kerjakan dengan profesional, cepat, dan bertanggung jawab.
             </p>
 
             <div
@@ -72,7 +68,7 @@ export const About = () => {
                   darkMode ? "text-gray-200" : "text-gray-700"
                 }`}
               >
-                “Membangun solusi digital yang kuat, modern, dan berkelanjutan.”
+                “Solusi teknologi terpercaya untuk kebutuhan internet, software, dan elektronik Anda.”
               </p>
             </div>
           </div>
@@ -84,7 +80,7 @@ export const About = () => {
                 darkMode ? "bg-gray-800" : "bg-gray-200"
               }`}
             >
-              <img src="/Logo (1).png" alt="Company Logo" className="w-full h-full object-cover" />
+              <img src="/Logo (1).jpeg" alt="Company Logo" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -97,11 +93,11 @@ export const About = () => {
               <div key={index} className="text-center">
                 <div
                   className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                    darkMode ? "bg-orange-500" : "bg-gray-200"
+                    darkMode ? "bg-blue-600" : "bg-blue-100"
                   }`}
                 >
                   <Icon
-                    className={`${darkMode ? "text-white" : "text-orange-500"}`}
+                    className={`${darkMode ? "text-white" : "text-blue-600"}`}
                     size={28}
                   />
                 </div>

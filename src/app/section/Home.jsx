@@ -13,7 +13,7 @@ export const Home = () => {
         ${
           darkMode
             ? "bg-gradient-to-br from-gray-900 to-black text-white"
-            : "bg-gradient-to-b from-orange-600 to-orange-400 text-white"
+            : "bg-white text-white"
         }`}
     >
       {/* Content */}
@@ -37,8 +37,7 @@ export const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.9, ease: "easeOut" }}
         >
-          Kami menawarkan untuk membantu anda dalam mengembangkan bisnis anda
-          melalui pengelolaan sosial media.
+          Adhinet hadir untuk membantu Anda dengan layanan jaringan internet, pengembangan software, dan reparasi elektronik secara profesional.
         </motion.p>
 
         {/* Button */}

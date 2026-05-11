@@ -18,31 +18,32 @@ export const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("access_key", accessKey);
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("subject", formData.subject);
-    formDataToSend.append("message", formData.message);
-    formDataToSend.append("botcheck", "");
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("access_key", accessKey);
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("subject", formData.subject);
+      formDataToSend.append("message", formData.message);
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formDataToSend,
-    });
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      toast.success(
-        "Pesan berhasil dikirim! Kami akan menghubungi Anda segera."
-      );
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } else {
-      toast.error("Gagal mengirim pesan. Silakan coba lagi.");
+      if (data.success) {
+        toast.success("Pesan berhasil dikirim! Kami akan menghubungi Anda segera.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Gagal mengirim pesan. Silakan coba lagi.");
+      }
+    } catch {
+      toast.error("Terjadi kesalahan jaringan. Periksa koneksi Anda.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   const handleChange = (e) => {
@@ -71,7 +72,6 @@ export const Contact = () => {
               onSubmit={handleSubmit}
               className="bg-white p-8 rounded-xl shadow-sm"
             >
-              <input type="hidden" name="botcheck" />
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
@@ -142,7 +142,7 @@ export const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-orange-500 text-white rounded-lg hover:bg-orange-400 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {isSubmitting ? "Mengirim..." : "Kirim Pesan"}
                 <Send size={20} />
@@ -153,24 +153,24 @@ export const Contact = () => {
           {/* CONTACT INFO */}
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
                 <Mail className="text-white" size={24} />
               </div>
               <h3 className="mb-2">Email</h3>
-              <p className="text-gray-600">bloombcreativestudios@gmail.com</p>
+              <p className="text-gray-600">adhinet.info@gmail.com</p>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
                 <Phone className="text-white" size={24} />
               </div>
               <h3 className="mb-2">Telepon</h3>
-              <p className="text-gray-600">+62 878 3228 2111</p>
-              <p className="text-gray-600">+62 855 5922 7241</p>
+              <a href="https://wa.me/6287832282111" target="_blank" rel="noopener noreferrer" className="block text-gray-600 hover:text-blue-600 transition-colors">+62 878 3228 2111 (Admin)</a>
+              <a href="https://wa.me/6285319699265" target="_blank" rel="noopener noreferrer" className="block text-gray-600 hover:text-blue-600 transition-colors">+62 853 1969 9265 (Admin)</a>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
                 <MapPin className="text-white" size={24} />
               </div>
               <h3 className="mb-2">Alamat Kantor</h3>

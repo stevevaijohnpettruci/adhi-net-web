@@ -1,109 +1,107 @@
 import { useState } from "react";
-import { Code, Palette, Smartphone, Joystick } from "lucide-react";
-import { useTheme } from "../../context/useTheme";
+import { Wifi, Code, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const categories = [
-  "Web Development",
-  "Mobile Development",
-  "UI & UX Design",
-  "Graphic Design",
-  "Game Development",
+const wifiPackages = [
+  {
+    name: "Paket Basic",
+    speed: "10 Mbps",
+    price: "Rp 150.000",
+    period: "/ bulan",
+    features: [
+      "Kecepatan 10 Mbps",
+      "Unlimited Quota",
+      "Instalasi Gratis",
+      "Support 24/7",
+    ],
+    popular: false,
+  },
+  {
+    name: "Paket Standard",
+    speed: "25 Mbps",
+    price: "Rp 250.000",
+    period: "/ bulan",
+    features: [
+      "Kecepatan 25 Mbps",
+      "Unlimited Quota",
+      "Instalasi Gratis",
+      "Support 24/7",
+      "Router WiFi Gratis",
+    ],
+    popular: true,
+  },
+  {
+    name: "Paket Premium",
+    speed: "50 Mbps",
+    price: "Rp 400.000",
+    period: "/ bulan",
+    features: [
+      "Kecepatan 50 Mbps",
+      "Unlimited Quota",
+      "Instalasi Gratis",
+      "Support 24/7",
+      "Router WiFi Gratis",
+      "IP Publik Statis",
+    ],
+    popular: false,
+  },
 ];
 
-const portfolioData = {
-  "Web Development": [
-    {
-      icon: Code,
-      title: "Website Game Developer Tasikmalaya",
-      description:
-        "Website profil komunitas Game Developer Tasikmalaya dengan informasi event, portofolio anggota, dan halaman komunitas interaktif.",
-      url: "https://gamedevtasikmalaya.chatomz.com/",
-    },
-    {
-      icon: Code,
-      title: "Website Kuis Interaktif Bahasa Sunda",
-      description:
-        "Aplikasi kuis edukasi dengan sistem skor otomatis, leaderboard, dan antarmuka interaktif untuk pembelajaran bahasa Sunda.",
-      url: "https://euy-lang.vercel.app/",
-    },
-    {
-      icon: Code,
-      title: "Website Profil Perusahaan",
-      description:
-        "Website company profile modern dengan desain responsif, navigasi elegan, dan struktur informasi yang profesional.",
-      url: "https://www.bloomb-studio.site/",
-    },
-    {
-      icon: Code,
-      title: "Website Penjualan Merch Band Bambootown",
-      description:
-        "Website katalog dan pemesanan merchandise dengan tampilan visual kreatif serta sistem order yang sederhana dan user-friendly.",
-      url: "https://bambootown-merch.vercel.app",
-    },
-  ],
+const softwarePackages = [
+  {
+    name: "Paket Starter",
+    type: "Landing Page",
+    price: "Rp 500.000",
+    period: "sekali bayar",
+    features: [
+      "1 Halaman Landing Page",
+      "Desain Responsif",
+      "Revisi 2x",
+      "Serah terima source code",
+    ],
+    popular: false,
+  },
+  {
+    name: "Paket Business",
+    type: "Website Company Profile",
+    price: "Rp 1.500.000",
+    period: "sekali bayar",
+    features: [
+      "Hingga 5 Halaman",
+      "Desain Responsif",
+      "CMS Sederhana",
+      "Revisi 5x",
+      "Domain & Hosting 1 Tahun",
+    ],
+    popular: true,
+  },
+  {
+    name: "Paket Enterprise",
+    type: "Aplikasi Web Custom",
+    price: "Hubungi Kami",
+    period: "",
+    features: [
+      "Fitur Custom sesuai kebutuhan",
+      "Dashboard Admin",
+      "Integrasi API",
+      "Revisi Unlimited",
+      "Maintenance 3 Bulan",
+    ],
+    popular: false,
+  },
+];
 
-  "Mobile Development": [
-    {
-      icon: Smartphone,
-      title: "Aplikasi Penjualan Buket – PO Buket Rancah",
-      description:
-        "Aplikasi mobile untuk pemesanan buket lengkap dengan katalog produk, form order, dan desain minimalis yang nyaman digunakan.",
-      url: "https://po-buket-rancah.vercel.app",
-    },
-  ],
-
-  "UI & UX Design": [
-    {
-      icon: Palette,
-      title: "UI/UX Mobile App IoT Monitoring – Ecoponds",
-      description:
-        "Desain UI/UX dashboard mobile untuk monitoring kualitas air kolam, suhu, dan parameter IoT secara real-time.",
-      url: "https://www.figma.com/design/ZCmEetq8egYP9Ql3eGnFvH/ECOPONDS?node-id=0-1&p=f",
-    },
-    {
-      icon: Palette,
-      title: "UI/UX Mobile App Pemesanan Buket – PO Buket Rancah",
-      description:
-        "Perancangan flow pemesanan buket dari katalog hingga checkout dengan tampilan clean dan pengalaman pengguna yang sederhana.",
-      url: "https://figma.com/file/buket-ui",
-    },
-  ],
-
-  "Graphic Design": [
-    {
-      icon: Palette,
-      title: "Re-design Brand Identity Cikara Studio",
-      description:
-        "Rebranding visual mencakup pembuatan logo baru, palet warna, tipografi, dan brand guideline lengkap.",
-      url: "https://www.instagram.com/p/DQea8aIgVho/?igsh=MTVsNjdhZzlrMDU0aQ==",
-    },
-  ],
-
-  "Game Development": [
-    {
-      icon: Joystick,
-      title: "Wildlens AR Augmented Reality Game",
-      description:
-        "Game edukasi berbasis AR yang memungkinkan pemain mempelajari satwa melalui pengalaman interaktif.",
-      url: "https://bloomb-creative.itch.io/wildlens-ar",
-    },
-  ],
-};
+const tabs = [
+  { id: "wifi", label: "Paket WiFi", icon: Wifi },
+  { id: "software", label: "Paket Software", icon: Code },
+];
 
 export const Portfolio = () => {
-  const [active, setActive] = useState("Web Development");
-  const { darkMode } = useTheme();
+  const [active, setActive] = useState("wifi");
+  const packages = active === "wifi" ? wifiPackages : softwarePackages;
 
   return (
-    <section
-      id="portfolio"
-      className={`py-20 transition-colors duration-300 ${
-        darkMode
-          ? "bg-linear-to-br from-gray-900 to-gray-700 text-white"
-          : "bg-linear-to-br from-orange-500 to-orange-400 text-white"
-      }`}
-    >
+    <section id="portfolio" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -113,114 +111,93 @@ export const Portfolio = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="mb-4 text-3xl font-semibold">Portfolio Kami</h1>
-          <p
-            className={`max-w-3xl mx-auto ${
-              darkMode ? "text-gray-300" : "text-white/90"
-            }`}
-          >
-            Jelajahi berbagai proyek yang telah kami kerjakan di berbagai bidang
-            digital.
+          <h1 className="mb-4 text-3xl font-semibold text-gray-800">Paket Produk</h1>
+          <p className="max-w-2xl mx-auto text-gray-500">
+            Pilih paket yang sesuai dengan kebutuhan Anda. Semua paket sudah termasuk dukungan teknis dari tim kami.
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <motion.div
-          className={`flex bg-black/20 backdrop-blur-md rounded-xl p-3 overflow-x-auto gap-3 ${
-            darkMode ? "bg-white/10" : "bg-black/20"
-          }`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
-                active === cat
-                  ? darkMode
-                    ? "bg-orange-500 text-white shadow-lg"
-                    : "bg-white text-orange-600 shadow-md"
-                  : darkMode
-                  ? "text-gray-300 hover:text-white"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </motion.div>
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex bg-white border border-gray-200 rounded-xl p-1 gap-1 shadow-sm">
+            {tabs.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => setActive(id)}
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  active === id
+                    ? "bg-blue-600 text-white shadow"
+                    : "text-gray-500 hover:text-blue-600"
+                }`}
+              >
+                <Icon size={16} />
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              show: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  staggerChildren: 0.15,
-                },
-              },
-            }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.4 }}
           >
-            {portfolioData[active].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    show: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className={`p-8 rounded-xl transition-all shadow-sm hover:shadow-xl ${
-                    darkMode
-                      ? "bg-gray-800 hover:shadow-gray-700"
-                      : "bg-white text-black hover:shadow-gray-300"
+            {packages.map((pkg, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className={`relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow flex flex-col ${
+                  pkg.popular ? "ring-2 ring-blue-600" : "border border-gray-100"
+                }`}
+              >
+                {pkg.popular && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-semibold px-4 py-1 rounded-full">
+                    Paling Populer
+                  </span>
+                )}
+
+                <div className="mb-6">
+                  <p className="text-sm text-blue-600 font-medium mb-1">
+                    {active === "wifi" ? pkg.speed : pkg.type}
+                  </p>
+                  <h3 className="text-xl font-bold text-gray-800">{pkg.name}</h3>
+                </div>
+
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-gray-800">{pkg.price}</span>
+                  {pkg.period && (
+                    <span className="text-gray-400 text-sm ml-1">{pkg.period}</span>
+                  )}
+                </div>
+
+                <ul className="space-y-3 mb-8 flex-1">
+                  {pkg.features.map((f, j) => (
+                    <li key={j} className="flex items-center gap-2 text-gray-600 text-sm">
+                      <Check size={16} className="text-blue-600 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#contact"
+                  className={`block text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
+                    pkg.popular
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-blue-50 text-blue-600 hover:bg-blue-100"
                   }`}
                 >
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-                      darkMode ? "bg-orange-500" : "bg-orange-100"
-                    }`}
-                  >
-                    <Icon
-                      className={`${
-                        darkMode ? "text-white" : "text-orange-600"
-                      }`}
-                      size={26}
-                    />
-                  </div>
-
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-
-                  <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                    {item.description}
-                  </p>
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-block mt-4 px-4 py-2 text-sm font-medium rounded-lg transition ${
-                      darkMode
-                        ? "bg-orange-500 text-white hover:bg-orange-600"
-                        : "bg-orange-100 text-orange-600 hover:bg-orange-200"
-                    }`}
-                  >
-                    Live Preview →
-                  </a>
-                </motion.div>
-              );
-            })}
+                  Pilih Paket
+                </a>
+              </motion.div>
+            ))}
           </motion.div>
         </AnimatePresence>
       </div>

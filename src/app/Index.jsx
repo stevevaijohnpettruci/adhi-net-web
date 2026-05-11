@@ -2,8 +2,7 @@ import { AppLayout } from "./AppLayout";
 import { Home } from "./section/Home";
 import { Portfolio } from "./section/Portfolio";
 import { Services } from "./section/Services";
-import { Team } from "./section/Team";
-import { About } from "./section/About";
+import { FAQ } from "./section/FAQ";
 import { Contact } from "./section/Contact";
 export const Index = () => {
   return (
@@ -11,8 +10,7 @@ export const Index = () => {
       <Home />
       <Services />
       <Portfolio />
-      <Team />
-      <About/>
+      <FAQ />
       <Contact/>
     </AppLayout>
   );

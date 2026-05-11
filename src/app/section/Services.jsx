@@ -1,31 +1,25 @@
-import { Code, Palette, Smartphone, Joystick } from "lucide-react";
+import { Code, Wifi, Wrench } from "lucide-react";
 import { useTheme } from "../../context/useTheme";
 import { motion } from "framer-motion";
 
 const services = [
   {
+    icon: Wifi,
+    title: "Jaringan Internet",
+    description:
+      "Layanan instalasi, konfigurasi, dan maintenance jaringan internet yang stabil, cepat, dan aman untuk kebutuhan rumah maupun bisnis.",
+  },
+  {
     icon: Code,
-    title: "Pengembangan Website",
+    title: "Pengembangan Software",
     description:
       "Kami membangun website modern, cepat, responsif, dan mudah dikelola sesuai kebutuhan bisnis Anda.",
   },
   {
-    icon: Smartphone,
-    title: "Aplikasi Mobile",
+    icon: Wrench,
+    title: "Reparasi Elektronik",
     description:
-      "Solusi aplikasi mobile berbasis Android & iOS yang stabil, ringan, dan memiliki UX yang optimal.",
-  },
-  {
-    icon: Palette,
-    title: "Desain Grafis & UI/UX",
-    description:
-      "Desain antarmuka yang estetis, mudah digunakan, dan difokuskan pada pengalaman pengguna.",
-  },
-  {
-    icon: Joystick,
-    title: "Pengembangan Game",
-    description:
-      "Pembuatan game 2D/3D untuk kebutuhan komersial, edukasi, maupun brand activation.",
+      "Melayani perbaikan berbagai perangkat elektronik dengan penanganan profesional, cepat, dan terpercaya.",
   },
 ];
 
@@ -54,14 +48,13 @@ export const Services = () => {
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            Kami menyediakan berbagai layanan digital untuk membantu bisnis Anda
-            berkembang dan tampil lebih profesional.
+              Kami menyediakan layanan jaringan internet, pengembangan software, dan reparasi elektronik untuk kebutuhan rumah maupun bisnis Anda secara profesional.
           </p>
         </motion.div>
 
         {/* Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -92,16 +85,18 @@ export const Services = () => {
               >
                 <div
                   className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4
-                    ${darkMode ? "bg-orange-500" : "bg-orange-100"}
+                    ${darkMode ? "bg-blue-600" : "bg-blue-100"}
                   `}
                 >
                   <Icon
-                    className={`${darkMode ? "text-white" : "text-orange-500"}`}
+                    className={`${darkMode ? "text-white" : "text-blue-600"}`}
                     size={24}
                   />
                 </div>
 
-                <h3 className="mb-3 text-lg font-semibold">{service.title}</h3>
+                <h3 className="mb-3 text-lg font-semibold">
+                  {service.title}
+                </h3>
 
                 <p
                   className={`${darkMode ? "text-gray-300" : "text-gray-600"}`}

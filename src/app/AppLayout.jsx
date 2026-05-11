@@ -1,13 +1,15 @@
-import { Navbar } from "../components/ui/Navbar";
-import { ThemeProvider } from "../context/useTheme";
-import { Footer } from "./section/Footer";
+import BannerInfo from '../components/ui/BannerInfo';
+import { Navbar } from '../components/ui/Navbar';
+import { ThemeProvider } from '../context/useTheme';
+import { Footer } from './section/Footer';
+
 export const AppLayout = ({ children }) => {
   return (
-    <>
-
-        <Navbar />
-        <main>{children}</main>
-        <Footer/>
-    </>
+    <ThemeProvider>
+      <BannerInfo />
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </ThemeProvider>
   );
 };

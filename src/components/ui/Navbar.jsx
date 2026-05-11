@@ -1,18 +1,17 @@
 import { NavItem } from "./NavItem";
-import { useTheme } from "../../context/useTheme";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const menu = [
-    { label: "Layanan Kami", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Tim", href: "#team" },
-    { label: "Tentang", href: "#about" },
-    { label: "Hubungi Kami", href: "#contact" },
+    { label: "Layanan Kami", href: "/#services" },
+    { label: "Paket Produk", href: "/#portfolio" },
+    { label: "FAQ", href: "/#team" },
+    { label: "Tentang", href: "/tentang", isRoute: true },
+    { label: "Hubungi Kami", href: "/#contact" },
   ];
 
-  const { darkMode, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -29,27 +28,14 @@ export const Navbar = () => {
       {/* NAVBAR */}
       <nav
         className={`
-        w-full fixed top-0 left-0 z-50 transition-all duration-300 
-        shadow-sm backdrop-blur-md
-        ${scrolled ? "py-2" : "py-4"}
-        ${
-          darkMode
-            ? scrolled
-              ? "bg-black/70 text-white"
-              : "bg-black text-white"
-            : scrolled
-            ? "bg-black/70 text-white"
-            : "bg-orange-500 text-white"
-        }
+        w-full sticky top-0 z-50 transition-all duration-300
+        border-b border-blue-100
+        ${scrolled ? "py-2 shadow-md bg-white/95 backdrop-blur-md" : "py-4 bg-white"}
       `}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6">
           {/* Logo */}
-          <div
-            className={`text-2xl font-bold transition-all duration-300 ${
-              scrolled ? "scale-95" : "scale-100"
-            }`}
-          >
+          <div className={`transition-all duration-300 ${scrolled ? "scale-95" : "scale-100"}`}>
             <a href="#hero">
               <img className="w-40" src="/Logo (2).png" />
             </a>
@@ -58,32 +44,26 @@ export const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 items-center">
             {menu.map((item, i) => (
-              <NavItem key={i} label={item.label} href={item.href} />
+              item.isRoute
+                ? <Link key={i} to={item.href} className="text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200 relative group">{item.label}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-200" /></Link>
+                : <NavItem key={i} label={item.label} href={item.href} />
             ))}
           </div>
 
-          {/* RIGHT SIDE — TOGGLE + HAMBURGER */}
+          {/* RIGHT SIDE */}
           <div className="flex items-center gap-3">
-            {/* Toggle Theme */}
-            <button
-              onClick={toggleTheme}
-              className={`
-        p-2 rounded-full transition-all duration-300
-        ${
-          darkMode
-            ? "bg-gray-800 text-yellow-400 hover:bg-gray-700"
-            : "bg-white text-orange-500 hover:bg-gray-100"
-        }
-        ${scrolled ? "scale-90" : "scale-100"}
-      `}
+            {/* CTA Button */}
+            <a
+              href="/#contact"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
             >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+              Dapatkan Promo
+            </a>
 
             {/* Hamburger (Mobile Only) */}
             <button
               onClick={() => setOpen(!open)}
-              className="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm"
+              className="md:hidden p-2 rounded-lg text-blue-600 hover:bg-blue-50"
             >
               {open ? <X size={26} /> : <Menu size={26} />}
             </button>
@@ -93,35 +73,23 @@ export const Navbar = () => {
 
       {/* MOBILE MENU DROPDOWN */}
       <div
-        className={`
-          md:hidden fixed top-0 left-0 w-full h-screen backdrop-blur-md z-40
-          transition-all duration-300
-          ${
-            open
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          }
-        `}
+        className={`md:hidden transition-all duration-300 overflow-hidden bg-white border-t border-blue-100 ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
-        <div
-          className={`
-            absolute top-20 left-1/2 -translate-x-1/2 w-[90%]
-            p-6 rounded-xl shadow-xl transition-all duration-300
-            ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}
-          `}
-        >
-          <div className="flex flex-col gap-6 text-lg">
-            {menu.map((item, i) => (
-              <a
-                key={i}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="border-b pb-2"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+        <div className="flex flex-col px-6 py-4 gap-4">
+          {menu.map((item, i) => (
+            item.isRoute
+              ? <Link key={i} to={item.href} onClick={() => setOpen(false)} className="text-gray-700 font-medium border-b border-gray-100 pb-3 hover:text-blue-600 transition-colors">{item.label}</Link>
+              : <a key={i} href={item.href} onClick={() => setOpen(false)} className="text-gray-700 font-medium border-b border-gray-100 pb-3 hover:text-blue-600 transition-colors">{item.label}</a>
+          ))}
+          <a
+            href="/#contact"
+            onClick={() => setOpen(false)}
+            className="mt-1 text-center px-4 py-2 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Dapatkan Promo
+          </a>
         </div>
       </div>
     </>
